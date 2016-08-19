@@ -2,29 +2,38 @@
 function GitHub(){
 	this.data = {};
 	this.commits = {};
+	this.user = "";
+	this.repos = [];
 }
 
-GitHub.prototype.getEvents = function(callback){
+GitHub.prototype.getCommits= function(repo, callback){
 	var self = this;
-	jsonp("https://api.github.com/users/kiricon/events?callback=json_callback", function(response){
-		self.data = response.data;
+	jsonp("https://api.github.com/repos/"+this.user+"/"+repo+"/commits?per_page=1000000&callback=json_callback", function(response){
+		response.data.forEach(function(value)}{
+			self.commits.push(value.commit);
+		});
 		return callback();
 	});
 	
 }
 
-GitHub.prototype.getCommits = function() {
+GitHub.prototype.getRepos = function(callback){
 	var self = this;
-	this.getEvents(function(){
+	jsonp("https://api.github.com/users/"+this.user+"/repos?callback=json_callback", function(response){
 		var list = [];
-		self.data.forEach(function(value, index){
-			if(value.type == "PushEvent"){
-				value.payload.commits.forEach(function(commit){
-					list.push(commit);
-				
-				});
-			}
+		response.data.forEach(function(value){
+			list.push(value.name);
 		});
-		self.commits = list;
+		self.repos = list;
+		return callback();
+	});
+}
+
+GitHub.prototype.getAllCommits = function() {
+	var self = this;
+	this.getRepos(function(){
+		this.repos.forEach(function(value){
+
+		});
 	});
 };
