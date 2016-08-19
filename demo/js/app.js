@@ -1,1 +1,2 @@
-alert('Jello');
+var github = new GitHub();
+github.getCommits();

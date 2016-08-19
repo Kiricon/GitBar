@@ -1,1 +1,1 @@
-alert("Jello");
+function GitHub(){this.data={},this.commits={}}GitHub.prototype.getEvents=function(t){var i=this;jsonp("https://api.github.com/users/kiricon/events?callback=json_callback",function(n){return i.data=n.data,t()})},GitHub.prototype.getCommits=function(){var t=this;this.getEvents(function(){var i=[];t.data.forEach(function(t,n){"PushEvent"==t.type&&t.payload.commits.forEach(function(t){i.push(t)})}),t.commits=i})};

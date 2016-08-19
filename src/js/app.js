@@ -1,1 +1,2 @@
-alert('Jellos');
+var github = new GitHub();
+github.getCommits();
