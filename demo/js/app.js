@@ -1,2 +1,3 @@
 var github = new GitHub();
-github.getCommits();
+github.user = "kiricon";
+github.getAllCommits();
